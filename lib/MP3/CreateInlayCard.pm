@@ -4,6 +4,11 @@ our $VERSION = '0.01';
 
 # $Id$
 
+use strict;
+use File::Recurse;
+use MP3::Tag;
+use Cwd;
+use HTML::Template;
 
 =head1 NAME
 
@@ -40,13 +45,6 @@ to a CD, and want an inlay label created for you.
 
 =cut
 
-# $Id$
-
-use strict;
-use File::Recurse;
-use MP3::Tag;
-use Cwd;
-use HTML::Template;
 
 
 sub create_inlay {

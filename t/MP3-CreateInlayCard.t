@@ -63,6 +63,6 @@ for my $tagtype (qw(id3v1 id3v2)) {
     
     like($result, qr/artist:Artist1/, 'one-artist dir - artist looks right');
     like($result, qr/album:Album1/, 'one-album dir - album looks right');
-    like($result, qr/1:Title1:Artist1/, 'Track details look OK');
+    like($result, qr/Title1:Artist1/, 'Track details look OK');
 
 }

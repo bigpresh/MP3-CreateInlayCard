@@ -74,6 +74,9 @@ sub create_inlay {
     my %albums;
     
     for my $dir (keys %files) {
+        
+        next if ($dir =~ /^.svn/);
+    
         for my $file (@{ $files{$dir} }) {
         
             $file = $dir . '/' . $file;

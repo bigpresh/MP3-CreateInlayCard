@@ -46,6 +46,32 @@ to a CD, and want an inlay label created for you.
 =cut
 
 
+=head1 FUNCTIONS
+
+=over 4
+
+=item create_inlay
+
+Go through the specified directory and produce the inlay.
+
+Takes a hashref of:
+
+=over 4
+
+=item I<dir>
+
+The directory containing the MP3 files
+
+=item I<template> 
+
+A scalar containing the filename of a template which HTML::Template should
+read and populate. Alternatively, it can be a scalar reference, in which
+case it will be taken to be the template contents to use.  If it's not
+supplied, a simple default built-in template will be used.
+
+=back
+
+=cut
 
 sub create_inlay {
     
@@ -75,7 +101,7 @@ sub create_inlay {
     
     for my $dir (keys %files) {
         
-        next if ($dir =~ /^.svn/);
+        next if ($dir =~ m{(^|/).svn});
     
         for my $file (@{ $files{$dir} }) {
         
@@ -147,6 +173,11 @@ sub create_inlay {
 
 } # end of sub create_inlay
 
+=back
+
+=cut
+
+
 our $default_template = <<TEMPLATE;
 <!-- Created by MP3::CreateInlayCard $VERSION (using default template) -->
 <html>
@@ -211,8 +242,8 @@ All bug reports, feature requests, patches etc welcome.
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2007 by David Precious
+Copyright (C) 2008 by David Precious
 
 This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself, either Perl version 5.8.7 or,
+it under the same terms as Perl itself, either Perl version 5.8.0 or,
 at your option, any later version of Perl 5 you may have available.

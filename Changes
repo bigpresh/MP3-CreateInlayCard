@@ -1,6 +1,9 @@
 Revision history for Perl extension MP3::CreateInlayCard.
 
-0.01  Sat Feb 10 20:47:02 2007
+0.02  2008/01/14
+    - minor changes to boost Kwalitee score, and work on 5.8.0
+    
+0.01  2007/02/10
 	- original version; created by h2xs 1.23 with options
 		-AXc -n MP3::CreateInlayCard
 

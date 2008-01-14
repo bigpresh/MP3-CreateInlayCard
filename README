@@ -1,4 +1,4 @@
-MP3-CreateInlayCard version 0.01
+MP3-CreateInlayCard README
 ================================
 
 Reads a directory of MP3s, and produces a HTML file you can print for a nice
@@ -22,10 +22,11 @@ DEPENDENCIES
 
 HTML::Template
 MP3::Tag
+File::Recurse
 
 COPYRIGHT AND LICENCE
 
-Copyright (C) 2007 by David Precious
+Copyright (C) 2008 by David Precious
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.8.7 or,

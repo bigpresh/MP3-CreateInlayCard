@@ -4,7 +4,9 @@ MANIFEST
 README
 inlay.tmpl
 test.tmpl
-t/MP3-CreateInlayCard.t
+t/1-basic.t
+t/2-pod.t
+t/3-pod-coverage.t
 lib/MP3/CreateInlayCard.pm
 test-mp3-files/id3v1/many-artists-many-albums/1.mp3
 test-mp3-files/id3v1/many-artists-many-albums/2.mp3

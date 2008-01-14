@@ -60,7 +60,9 @@ sub create_inlay {
     }
 
     
-    my %files = Recurse([$startdir], {match => '\.(mp3|MP3)'});
+    my %files = Recurse(
+        [$startdir], { match => '\.(mp3|MP3)', nomatch => '^\.svn' }
+    );
     
     my $track = 1;
     my @tracks;

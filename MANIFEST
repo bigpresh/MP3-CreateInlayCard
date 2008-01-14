@@ -2,6 +2,7 @@ Changes
 Makefile.PL
 MANIFEST
 README
+META.yml
 inlay.tmpl
 test.tmpl
 t/1-basic.t

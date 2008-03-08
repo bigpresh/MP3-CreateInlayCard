@@ -30,11 +30,17 @@ MP3::CreateInlayCard - create a CD inlay label for a directory of MP3 files
     # If you can't be bothered to write a script to call this module, use
     # 'makeinlay.pl' distributed with this package, or just do:
     perl -MMP3::CreateInlayCard -e \
-        "MP3::CreateInlayCard(create_inlay({ (see example above)  });"
+        "print MP3::CreateInlayCard(create_inlay({ (see example above)  });"
         
     # If you're in the directory containing the MP3's, and you want to use the
     # built-in default template, just supply an empty hashref:
-    perl -MMP3::CreateInlayCard -e "MP3::CreateInlayCard(create_inlay({});"
+    perl -MMP3::CreateInlayCard \
+        -e "print MP3::CreateInlayCard(create_inlay({});"
+        
+    # or, more easily, use the eg/createinlay.pl script supplied with this
+    # module.  (Perhaps copy it to somewhere in your path and rename it to
+    # 'createinlay', so you can just change directory into the appropriate
+    # place and type 'createinlay').
     
     
 =head1 DESCRIPTION
@@ -117,8 +123,13 @@ sub create_inlay {
                 . sprintf('%02d',$mp3->total_secs % 60);
                 
             push @tracks, { 
-                track => $track, length => $length, title => $mp3->title(),
-                artist => $mp3->artist() };
+                track => $track,
+                title => $params->{prettify} ?
+                    _prettify($mp3->title()) : $mp3->title(),
+                artist => $params->{pretify} ?
+                    _prettify($mp3->artist()) : $mp3->artist(),
+                length => $length,
+            };
             
             $artists{ $mp3->artist() }++;
             $albums{  $mp3->album()  }++;
@@ -176,6 +187,14 @@ sub create_inlay {
 =back
 
 =cut
+
+# return a "prettified" version of an artist/title - currently just converts
+# to title case, might support more options in future.  Of course, this isn't
+# always a good thing, as there are some artist names / song names which are
+# supposed to be in all capitals, or "officially" should be all in lowercase
+# etc, and will choke on double-barreled names "Dave Two-Names" or Scottish
+# names ("Johnny McScottish" or "Old MacDonald").
+sub _prettify { join ' ', map { ucfirst $_ } split /\s/, lc shift; }
 
 
 our $default_template = <<TEMPLATE;

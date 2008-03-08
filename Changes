@@ -1,5 +1,10 @@
 Revision history for Perl extension MP3::CreateInlayCard.
 
+0.03  2008/03/08
+    - minor Kwalitee-boosting tweaks
+    - add option to "prettify" artist/track names
+    - add example usage script
+    
 0.02  2008/01/14
     - minor changes to boost Kwalitee score, add POD tests, and work on 5.8.0
     

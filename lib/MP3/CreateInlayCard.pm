@@ -5,6 +5,7 @@ our $VERSION = '0.03';
 # $Id$
 
 use strict;
+use warnings;
 use File::Recurse;
 use MP3::Tag;
 use Cwd;

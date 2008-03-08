@@ -5,6 +5,7 @@ README
 META.yml
 inlay.tmpl
 test.tmpl
+eg/createinlay.pl
 t/1-basic.t
 t/2-pod.t
 t/3-pod-coverage.t

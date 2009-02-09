@@ -1,12 +1,12 @@
 package MP3::CreateInlayCard;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 # $Id$
 
 use strict;
 use warnings;
-use File::Recurse;
+use File::Find::Rule;
 use MP3::Tag;
 use Cwd;
 use HTML::Template;
@@ -93,9 +93,7 @@ sub create_inlay {
     }
 
     
-    my %files = Recurse(
-        [$startdir], { match => '\.(mp3|MP3)', nomatch => '^\.svn' }
-    );
+    my @files = File::Find::Rule->file()->name('*.mp3')->in($startdir);
     
     my $track = 1;
     my @tracks;
@@ -106,39 +104,31 @@ sub create_inlay {
     my %artists;
     my %albums;
     
-    for my $dir (keys %files) {
-        
-        next if ($dir =~ m{(^|/).svn});
-    
-        for my $file (@{ $files{$dir} }) {
-        
-            $file = $dir . '/' . $file;
-            
-            my $mp3;
-            eval { $mp3 = MP3::Tag->new($file); };
-            
-            if (!$mp3) { warn "Error reading $file\n"; next; }
-    
-            
-            my $length = sprintf('%02d',$mp3->total_secs / 60) . ':' 
-                . sprintf('%02d',$mp3->total_secs % 60);
-                
-            push @tracks, { 
-                track => $track,
-                title => $params->{prettify} ?
-                    _prettify($mp3->title()) : $mp3->title(),
-                artist => $params->{pretify} ?
-                    _prettify($mp3->artist()) : $mp3->artist(),
-                length => $length,
-            };
-            
-            $artists{ $mp3->artist() }++;
-            $albums{  $mp3->album()  }++;
-            $track++;
-        }
-            
+    for my $file (@files) {
+
+        my $mp3;
+        eval { $mp3 = MP3::Tag->new($file); };
+
+        if (!$mp3) { warn "Error reading $file\n"; next; }
+
+
+        my $length = sprintf('%02d',$mp3->total_secs / 60) . ':'
+            . sprintf('%02d',$mp3->total_secs % 60);
+
+        push @tracks, {
+            track => $track,
+            title => $params->{prettify} ?
+                _prettify($mp3->title()) : $mp3->title(),
+            artist => $params->{pretify} ?
+                _prettify($mp3->artist()) : $mp3->artist(),
+            length => $length,
+        };
+
+        $artists{ $mp3->artist() }++;
+        $albums{  $mp3->album()  }++;
+        $track++;
     }
-        
+
     # open the html template (this code is rather crufty, refactor someday)
     my $template;
     my $template_opts = { die_on_bad_params => 0 };
@@ -174,7 +164,7 @@ sub create_inlay {
     }
     
     # fill in some parameters
-    $template->param(tracks => \@tracks);
+    $template->param(tracks => sort { $a->{track} cmp $b->{track} } \@tracks);
     $template->param(artist => (scalar keys %artists == 1)?  
         (keys %artists)[0] : 'Various Artists');
     $template->param(album => (scalar keys %albums == 1)?
@@ -262,7 +252,7 @@ All bug reports, feature requests, patches etc welcome.
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2008 by David Precious
+Copyright (C) 2008-2009 by David Precious
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.8.0 or,

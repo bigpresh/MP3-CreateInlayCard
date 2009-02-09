@@ -7,7 +7,7 @@
  license: perl
  distribution_type: module
  requires:
-   File::Recurse: 0
+   File::Find::Rule: 0
    MP3::Tag: 0
    HTML::Template: 0
    Cwd: 0

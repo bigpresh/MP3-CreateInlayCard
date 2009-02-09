@@ -1,5 +1,10 @@
 Revision history for Perl extension MP3::CreateInlayCard.
 
+0.04  2009/02/09
+    - Use File::Find::Rule instead of File::Recurse (I've given up trying to
+      get co-maintainership of F::R to release a fixed version, and the old
+      version is no longer available from CPAN).
+
 0.03  2008/03/08
     - minor Kwalitee-boosting tweaks
     - add option to "prettify" artist/track names

@@ -106,7 +106,6 @@ sub create_inlay {
     
     for my $file (@files) {
 
-        my $mp3;
         my $tags = Music::Tag->new($file);
         $tags->get_tag or warn "Error reading tags from $file" and next;
 

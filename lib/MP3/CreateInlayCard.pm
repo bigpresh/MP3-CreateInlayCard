@@ -106,7 +106,7 @@ sub create_inlay {
     
     for my $file (@files) {
 
-        my $tags = Music::Tag->new($file);
+        my $tags = Music::Tag->new($file, { quiet => 1 });
         $tags->get_tag or warn "Error reading tags from $file" and next;
 
         my $length = sprintf('%02d',$tags->secs / 60) . ':'

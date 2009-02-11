@@ -2,7 +2,6 @@ Changes
 Makefile.PL
 MANIFEST
 README
-META.yml
 inlay.tmpl
 test.tmpl
 eg/createinlay.pl

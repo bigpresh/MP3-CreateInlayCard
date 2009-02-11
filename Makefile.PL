@@ -5,16 +5,18 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     NAME              => 'MP3::CreateInlayCard',
     VERSION_FROM      => 'lib/MP3/CreateInlayCard.pm', # finds $VERSION
-    NO_META           => 1,
     PREREQ_PM         => {
         'HTML::Template'   => 0,
-        'MP3::Tag'         => 0,
+        'Music::Tag'       => 0,
         'File::Find::Rule' => 0,
         'Cwd'              => 0,
     },
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/MP3/CreateInlayCard.pm',
        AUTHOR         => 'David Precious <davidp@preshweb.co.uk>') : ()),
+
+    # include the LICENSE param, as long as EU::MM is new enough to support it:
+    ($ExtUtils::MakeMaker::VERSION >= 6.3002 ? (LICENSE => "perl") : () ),
 );
 
 # $Id$

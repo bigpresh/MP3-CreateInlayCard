@@ -1,5 +1,12 @@
 Revision history for Perl extension MP3::CreateInlayCard.
 
+0.05  2009/02/11
+    - Oops, last release still had the problem of declaring MP3::Tag as a
+      requisite, but not MP3::Info, which MP3::Tag requires to actually do
+      anything.  Converted to use Music::Tag, a step in the right direction
+      towards supporting various file types.
+      Also, generate META.yml via the Makefile.PL instead of by hand.
+
 0.04  2009/02/09
     - Use File::Find::Rule instead of File::Recurse (I've given up trying to
       get co-maintainership of F::R to release a fixed version, and the old

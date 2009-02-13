@@ -8,6 +8,7 @@ WriteMakefile(
     PREREQ_PM         => {
         'HTML::Template'   => 0,
         'Music::Tag'       => 0,
+        'Music::Tag::MP3'  => 0,
         'File::Find::Rule' => 0,
         'Cwd'              => 0,
     },
